@@ -11,9 +11,9 @@ db.once('open', function() {
 });
 
 var userSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
+  name: String,
+  email: String,
+  password: String,
   created_at: Date
 });
 
@@ -22,14 +22,14 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 // Create a unique instance of the User model. Set its properties.
-var henrique = new User({name: 'Henrique', email: 'hpa.de.melo@gmail.com', password: '1234'});
+var henrique = new User({ name: 'Henrique', email: 'hpa.de.melo@gmail.com', password: '1234' });
 
-/*User.find({}, function(err, allUsers) {
+User.find({}, function(err, allUsers) {
   if (err) {
     console.error(err);
   } else {
     console.log('These are all users:\n' + allUsers);
   }
 });
-*/
+
 module.exports = User;
