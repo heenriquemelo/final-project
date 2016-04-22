@@ -2,7 +2,7 @@
   "name": "final_project",
   "version": "1.0.0",
   "description": "My final project for my CIS 197 (JavaScript) class at UPenn Spring 2016.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
