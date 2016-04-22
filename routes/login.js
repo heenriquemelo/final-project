@@ -1,13 +1,23 @@
 var express = require('express');
     router = express.Router(),
-    path = require('path');
+    path = require('path'),
+    User = require('../models/users.js');
 
 // What if the email is not in the db?
 // What is the pwd is wrong?
 // Handle this later.
 var rightPwd = function (email, pwd) {
-    // if email === email in database and pwd === pwd in database return true
-    // Test:
+    /
+    / if email === email in database and pwd === pwd in database return true
+
+/*    var userEmail = User.findOne({ email: req.body.email }, function (err, obj) {
+        if (err) {
+            return false;
+        } else {
+            return true;
+        }
+    });*/
+
     if (email === 'admin' && pwd === '1234') {
         return true;
     } else {
