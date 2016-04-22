@@ -22,7 +22,7 @@ var userSchema = new mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 // Create a unique instance of the User model. Set its properties.
-var henrique = new User({name: 'Henrique', email: 'hpa.de.melo@gmail.com', password: '1234'});
+/*var henrique = new User({name: 'Henrique', email: 'hpa.de.melo@gmail.com', password: '1234'});
 
 User.find({}, function(err, allUsers) {
   if (err) {
@@ -30,6 +30,6 @@ User.find({}, function(err, allUsers) {
   } else {
     console.log('These are all users:\n' + allUsers);
   }
-});
+});*/
 
 module.exports = User;
