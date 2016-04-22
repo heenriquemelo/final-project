@@ -1,31 +1,38 @@
 var express = require('express'),
     app = express(),
-    path = require('path'),
-    cookieSession = require('cookie-session'),
+    logger = require('morgan'),
+    session = require('express-session'),
     uuid = require('node-uuid'),
+    passport = require('passport'),
     bodyParser = require('body-parser'),
     loginRouter = require('./routes/login'),
     stocksRouter = require('./routes/stocks'),
-    isAuthenticated = require('./middlewares/isAuthenticated'),
+    isLoggedIn = require('./middlewares/isLoggedIn'),
     User = require('./models/users.js');
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname + '/views');
 app.set('port', process.env.PORT || 8888);
 app.engine('html', require('ejs').__express);
 app.set('view engine', 'html');
-
-app.use(bodyParser.urlencoded({extended: false}));
 
 var secretMaker = function () {
     return 'iamsoawesome' + uuid.v4();
 };
 
-app.use(cookieSession({secret: secretMaker()}));
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(session({ secret: secretMaker() }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/public', express.static(__dirname + '/public'));
 
-app.use('/', loginRouter);
+require('./middlewares/auth')(passport);
 
-app.use('/stocks', isAuthenticated, stocksRouter);
+loginRouter(app, passport);
+
+stocksRouter(app);
+
+// app.use('/stocks', isLoggedIn, stocksRouter);
 
 app.listen(app.get('port'), function() {
     console.log('Listening on port: ' + app.get('port'));

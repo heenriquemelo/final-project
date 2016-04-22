@@ -1,9 +1,7 @@
-var express = require('express');
-    router = express.Router(),
-    path = require('path');
+var isLoggedIn = require('../middlewares/isLoggedIn');
 
-router.get('/test', function (req, res) {
-    res.send('Test page accessed!');
-});
-
-module.exports = router;
+module.exports = function(app) {
+    app.get('/stocks', isLoggedIn, function (req, res) {
+        res.send('Stocks page accessed!');
+    });
+};
