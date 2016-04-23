@@ -33,7 +33,7 @@ module.exports = function(app, passport) {
 
     app.post('/', passport.authenticate('local', { 
         successRedirect: '/stocks', 
-        failureRedirect: '/' 
+        failureRedirect: '/'
     }));
 
     app.get('/signup', function (req, res) {
@@ -51,7 +51,7 @@ module.exports = function(app, passport) {
             if (err) {
                 console.log(err);
             } else {
-                console.log('A new user has been added to the DB: ' + obj);
+                res.redirect('/');
             }
         });
     });
