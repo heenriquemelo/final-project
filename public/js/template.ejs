@@ -1,0 +1,21 @@
+<% if (name && symbol && lastPrice && open && change && percentChange) { %>
+<p> <%= name %> (<%= symbol %>) </p>
+<table>
+    <thead>
+        <tr>
+            <th>Last Price</th>
+            <th>Open</th>
+            <th>Year's Change</th>
+            <th>Percentage Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th> <%= lastPrice %> </th>
+            <th> <%= open %> </th>
+            <th> <%= change %> </th>
+            <th> <%= percentChange %> </th>
+        </tr>
+    </tbody>
+</table>
+<% } %>

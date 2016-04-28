@@ -15,8 +15,9 @@ module.exports = function(app) {
         });
     });
 
-    app.get('/stocks', function (req, res) {
-        var symbol = req.body.symbol;
+    app.get('/endpoint', function (req, res) {
+
+        var symbol = req.query.symbol;
         var query = 'symbol=' + symbol;
 
         var stockHandler = function (err, data) {
@@ -24,7 +25,7 @@ module.exports = function(app) {
                 console.log(err);
             } else {
                 var jsonData = JSON.parse(data.JSON);
-                res.render('stocks', {
+                res.json({
                     name: jsonData.Name,
                     symbol: jsonData.Symbol,
                     lastPrice: jsonData.LastPrice,
