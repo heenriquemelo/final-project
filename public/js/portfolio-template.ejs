@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Symbol</th>
+            <th>Price bought</th>
+            <th>Current Price</th>
+            <th>No. of Shares</th>
+            <th>Percentage Return</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% stocks.forEach(function (stock) { %>
+        <tr>
+            <th> <%= stock.name %> </th>
+            <th> <%= stock.symbol %> </th>
+            <th> <%= stock.priceBought %> </th>
+            <th> <%= stock.currentPrice %> </th>
+            <th> <%= stock.noOfShares %> </th>
+            <th> <%= stock.percentReturn %> </th>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>

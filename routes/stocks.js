@@ -97,6 +97,16 @@ module.exports = function(app) {
         res.render('portfolio');
     });
 
+    app.get('/stockslist', isLoggedIn, function (req, res) {
+        db.User.findOne({_id: req.session.passport.user}, function (err, user) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.json(user.stocks);
+            }
+        });
+    });
+
 };
 
 

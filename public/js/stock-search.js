@@ -3,7 +3,7 @@ $(function () {
         if (e.keyCode === 13) {
             var params = { symbol: $(this).val() };
             $.get('/stockdata', params, function (data) {
-                var template = new EJS({url: '../public/js/template.ejs'})
+                var template = new EJS({url: '../public/js/stock-template.ejs'});
                 template.update('stock-table', data);
             });
             $(this).val('');
