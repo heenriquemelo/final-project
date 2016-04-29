@@ -15,19 +15,22 @@ var userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     created_at: { type: Date, default: Date.now },
-    stocks: { type: Array }
+    stocks: { type: Array } // [{ type: mongoose.Schema.Types.ObjectId, ref: 'Stock' }]
+});
+
+var stockSchema = new mongoose.Schema({
+    name: { type: String },
+    symbol: { type: String },
+    priceBought: { type: Number },
+    noOfShares: { type: Number }
 });
 
 // Based on the schema, create a certain model.
 // Many models can share the same schema. 'Client' could be another model in this case.
 var User = mongoose.model('User', userSchema);
+var Stock = mongoose.model('Stock', stockSchema);
 
-var stocksSchema = new mongoose.Schema({
-    name: { type: String },
-    symbol: { type: String },
-    priceBought: { type: Number }
-});
-
-module.exports = User;
-
-// CONNECT THE TWO SCHEMAS
+module.exports = {
+    User: User,
+    Stock: Stock
+}

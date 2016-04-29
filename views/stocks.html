@@ -5,10 +5,12 @@
         <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
         <script src="../public/js/ejs_production.js"></script>
         <link rel="stylesheet" type="text/css" href="../public/css/main.css">
+        <title>Stock Search</title>
     </head>
     <body>
         <h1>Stocks Page</h1>
-        <br><br>
+        <p>To check the stocks you've already bought, access your <a href="/portfolio">portfolio</a>.</p>
+        <br>
         <input name="symbol" id="search" type="search" placeholder="Type a stock symbol (e.g. AAPL or MSFT)">
         <br><br>
         <div id="stock-table"></div>
@@ -17,6 +19,6 @@
             <input name="shares" type="text" placeholder="No. of Shares">
             <button type="submit">BUY</button>
         </form>
-        <script src="../public/js/main.js"></script>
+        <script src="../public/js/stock-search.js"></script>
     </body>
 </html>

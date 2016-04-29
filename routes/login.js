@@ -1,5 +1,5 @@
 
-var User = require('../models/users.js');
+var User = require('../models/users.js').User;
 
 module.exports = function(app, passport) {
 

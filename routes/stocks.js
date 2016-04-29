@@ -1,21 +1,16 @@
 var isLoggedIn = require('../middlewares/isLoggedIn'),
-    stocksApi = require('../models/apiData.js');
+    stocksApi = require('../models/apiData.js'),
+    db = require('../models/users.js');
 
 module.exports = function(app) {
 
     // add isLoggedIn!!!
-    app.get('/stocks', function (req, res) {
-        res.render('stocks', {
-            name: null,
-            symbol: null,
-            lastPrice: null,
-            open: null,
-            change: null,
-            percentChange: null
-        });
+    app.get('/stocks', isLoggedIn, function (req, res) {
+        res.render('stocks');
     });
 
-    app.get('/endpoint', function (req, res) {
+    // Endpoint that has the API data pulled from MarketOnDemand
+    app.get('/stockdata', isLoggedIn, function (req, res) {
 
         // req.query for GET, req.body for POST.
         var symbol = req.query.symbol;
@@ -41,11 +36,77 @@ module.exports = function(app) {
 
     });
 
-    app.post('/stockdata', function (req, res) {
-        var stockdata = req.body;
+    // Endpoint that has the data from the stocks bought that was sent through JQuery.
+    app.post('/stockbought', isLoggedIn, function (req, res) {
+        var stockbought = req.body;
+
+        db.User.findByIdAndUpdate(
+            req.session.passport.user,
+            {$push: {'stocks': stockbought}},
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result);
+                }
+            }
+        );
+
         
-        // findOne - cuurent user. Populate('ugigu');
+        // var newStock = new db.Stock({
+        //     name: stockdata.name, 
+        //     symbol: stockdata.symbol, 
+        //     priceBought: stockdata.priceBought,
+        //     noOfShares: stockdata.noOfShares
+        // });
+
+        // newStock.save(function (err, newStockData) {
+        //     if (err) {
+        //         console.log(err)
+        //     } else {
+        //         console.log(newStockData);
+        //         // PUSH stock _id to the stocks array in the User model
+        //         db.User.findByIdAndUpdate(
+        //             req.session.passport.user,
+        //             {$push: {'stocks': newStockData._id}},
+        //             function (err, result) {
+        //                 if (err) {
+        //                     console.log(err);
+        //                 } else {
+        //                     console.log(result);
+        //                 }
+        //             }
+        //         );
+        //     }
+        // });
+
+        // db.User.findOne({_id: req.session.passport.user})
+        // .populate('stocks')
+        // .exec(function (err, user) {
+        //     if (err) {
+        //         console.log(err);
+        //     } else {
+        //         console.log(user.stocks);
+        //     }
+        // });
 
         res.json('Success!');
     });
+
+    app.get('/portfolio', isLoggedIn, function (req, res) {
+        res.render('portfolio');
+    });
+
 };
+
+
+
+
+
+
+
+
+
+
+
+

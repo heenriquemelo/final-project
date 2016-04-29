@@ -2,7 +2,7 @@ $(function () {
     $('#search').on('keyup', function (e) {
         if (e.keyCode === 13) {
             var params = { symbol: $(this).val() };
-            $.get('/endpoint', params, function (data) {
+            $.get('/stockdata', params, function (data) {
                 var template = new EJS({url: '../public/js/template.ejs'})
                 template.update('stock-table', data);
             });
@@ -11,7 +11,7 @@ $(function () {
     });
 
     $(document).on('DOMNodeInserted', function(e) {
-        if (e.target.id == 'table-element') {
+        if (e.target.id === 'table-element') {
            $('form').css('display', 'block');
         }
     });
@@ -27,7 +27,7 @@ $(function () {
         };
         
         // handle what happens on success/failure here!! 
-        $.post('/stockdata', purchaseData, function (response) {
+        $.post('/stockbought', purchaseData, function (response) {
             console.log(response);
         });
 
