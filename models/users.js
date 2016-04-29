@@ -7,29 +7,27 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:12345');
 
 // Once the connection is made, execute the callback.
 db.once('open', function() {
-  console.log("Connected to database");
+    console.log("Connected to database");
 });
 
 var userSchema = new mongoose.Schema({
-  name: { type: String, required: true},
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  created_at: { type: Date, default: Date.now }
+    name: { type: String, required: true},
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    created_at: { type: Date, default: Date.now },
+    stocks: { type: Array }
 });
 
 // Based on the schema, create a certain model.
 // Many models can share the same schema. 'Client' could be another model in this case.
 var User = mongoose.model('User', userSchema);
 
-/*var henrique = new User({ name: 'Henrique', email: 'hpa.de.melo@gmail.com', password: '1234' });
-
-henrique.save(function(err, henrique) {
-  if (err) {
-    console.error(err);
-  } else {
-    console.log(henrique.name + ' has been added to the database!');
-  }
-
-});*/
+var stocksSchema = new mongoose.Schema({
+    name: { type: String },
+    symbol: { type: String },
+    priceBought: { type: Number }
+});
 
 module.exports = User;
+
+// CONNECT THE TWO SCHEMAS

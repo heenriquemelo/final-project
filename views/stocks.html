@@ -4,34 +4,19 @@
     <head>
         <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
         <script src="../public/js/ejs_production.js"></script>
+        <link rel="stylesheet" type="text/css" href="../public/css/main.css">
     </head>
     <body>
         <h1>Stocks Page</h1>
+        <br><br>
+        <input name="symbol" id="search" type="search" placeholder="Type a stock symbol (e.g. AAPL or MSFT)">
+        <br><br>
+        <div id="stock-table"></div>
         <br>
-        <input name="symbol" id="symbol" type="search" placeholder="Type a stock symbol (e.g. AAPL or MSFT)">
-        <div id="stock-table">       
-<!--             <% if (name && symbol && lastPrice && open && change && percentChange) { %>
-            <p> <%= name %> (<%= symbol %>) </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Last Price</th>
-                        <th>Open</th>
-                        <th>Year's Change</th>
-                        <th>Percentage Change</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th> <%= lastPrice %> </th>
-                        <th> <%= open %> </th>
-                        <th> <%= change %> </th>
-                        <th> <%= percentChange %> </th>
-                    </tr>
-                </tbody>
-            </table>
-            <% } %> -->
-        </div>
+        <form>
+            <input name="shares" type="text" placeholder="No. of Shares">
+            <button type="submit">BUY</button>
+        </form>
         <script src="../public/js/main.js"></script>
     </body>
 </html>

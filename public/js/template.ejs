@@ -1,21 +1,23 @@
 <% if (name && symbol && lastPrice && open && change && percentChange) { %>
-<p> <%= name %> (<%= symbol %>) </p>
-<table>
+
+<p> <span id="name"> <%= name %> </span> (<span id="symbol"> <%= symbol %> </span>) </p>
+<table id="table-element">
     <thead>
         <tr>
             <th>Last Price</th>
             <th>Open</th>
             <th>Year's Change</th>
-            <th>Percentage Change</th>
+            <th>Year's Percent. Change</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <th> <%= lastPrice %> </th>
-            <th> <%= open %> </th>
-            <th> <%= change %> </th>
-            <th> <%= percentChange %> </th>
+            <th id="lastPrice"> <%= lastPrice %> </th>
+            <th id="open"> <%= open %> </th>
+            <th id="change"> <%= change %> </th>
+            <th id="percentChange"> <%= percentChange %> </th>
         </tr>
     </tbody>
 </table>
+
 <% } %>

@@ -3,7 +3,7 @@ var isLoggedIn = require('../middlewares/isLoggedIn'),
 
 module.exports = function(app) {
 
-    // add isLoggedIn in later!!
+    // add isLoggedIn!!!
     app.get('/stocks', function (req, res) {
         res.render('stocks', {
             name: null,
@@ -17,6 +17,7 @@ module.exports = function(app) {
 
     app.get('/endpoint', function (req, res) {
 
+        // req.query for GET, req.body for POST.
         var symbol = req.query.symbol;
         var query = 'symbol=' + symbol;
 
@@ -31,12 +32,20 @@ module.exports = function(app) {
                     lastPrice: jsonData.LastPrice,
                     open: jsonData.Open,
                     change: jsonData.ChangeYTD,
-                    percentChange: jsonData.ChangePercentYTD
+                    percentChange: jsonData.ChangePercentYTD.toFixed(2)
                 });
             }
         };
 
         stocksApi(query, stockHandler);
 
+    });
+
+    app.post('/stockdata', function (req, res) {
+        var stockdata = req.body;
+        
+        // findOne - cuurent user. Populate('ugigu');
+
+        res.json('Success!');
     });
 };
