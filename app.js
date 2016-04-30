@@ -6,7 +6,8 @@ var express = require('express'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
     loginRouter = require('./routes/login'),
-    stocksRouter = require('./routes/stocks');
+    stocksRouter = require('./routes/stocks'),
+    pageNotFound = require('./middlewares/pageNotFound');
 
 app.set('views', __dirname + '/views');
 app.set('port', process.env.PORT || 8888);
@@ -29,6 +30,8 @@ require('./middlewares/auth')(passport);
 loginRouter(app, passport);
 
 stocksRouter(app);
+
+app.use(pageNotFound);
 
 app.listen(app.get('port'), function () {
     console.log('Listening on port: ' + app.get('port'));

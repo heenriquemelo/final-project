@@ -4,7 +4,11 @@ var isLoggedIn = function (req, res, next) {
         next();
     }
     else {
-        res.status(401).send('You must be logged in to access the page!');
+        res.status(401);
+        res.render('error', {
+            statusCode: res.statusCode,
+            message: 'You must be logged in to access this page!'
+        });
     }
 };
 

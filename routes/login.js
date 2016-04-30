@@ -1,4 +1,3 @@
-
 var User = require('../models/users.js').User;
 
 module.exports = function(app, passport) {
@@ -8,9 +7,10 @@ module.exports = function(app, passport) {
     });
 
     app.post('/', passport.authenticate('local', { 
-        successRedirect: '/stocks', 
-        failureRedirect: '/'
-    }));
+            successRedirect: '/stocks', 
+            failureRedirect: '/'
+        }
+    ));
 
     app.get('/signup', function (req, res) {
         res.render('signup');

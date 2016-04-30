@@ -4,7 +4,6 @@ var isLoggedIn = require('../middlewares/isLoggedIn'),
 
 module.exports = function(app) {
 
-    // add isLoggedIn!!!
     app.get('/stocks', isLoggedIn, function (req, res) {
         res.render('stocks');
     });
@@ -19,6 +18,8 @@ module.exports = function(app) {
         var stockHandler = function (err, data) {
             if (err) {
                 console.log(err);
+            } else if (JSON.parse(data.JSON).hasOwnProperty('Message')) {
+                res.json({message: 'Invalid stock! Try something like AAPL, MSFT or GPRO.'});
             } else {
                 var jsonData = JSON.parse(data.JSON);
                 res.json({
@@ -51,44 +52,6 @@ module.exports = function(app) {
                 }
             }
         );
-
-        
-        // var newStock = new db.Stock({
-        //     name: stockdata.name, 
-        //     symbol: stockdata.symbol, 
-        //     priceBought: stockdata.priceBought,
-        //     noOfShares: stockdata.noOfShares
-        // });
-
-        // newStock.save(function (err, newStockData) {
-        //     if (err) {
-        //         console.log(err)
-        //     } else {
-        //         console.log(newStockData);
-        //         // PUSH stock _id to the stocks array in the User model
-        //         db.User.findByIdAndUpdate(
-        //             req.session.passport.user,
-        //             {$push: {'stocks': newStockData._id}},
-        //             function (err, result) {
-        //                 if (err) {
-        //                     console.log(err);
-        //                 } else {
-        //                     console.log(result);
-        //                 }
-        //             }
-        //         );
-        //     }
-        // });
-
-        // db.User.findOne({_id: req.session.passport.user})
-        // .populate('stocks')
-        // .exec(function (err, user) {
-        //     if (err) {
-        //         console.log(err);
-        //     } else {
-        //         console.log(user.stocks);
-        //     }
-        // });
 
         res.json('Success!');
     });
