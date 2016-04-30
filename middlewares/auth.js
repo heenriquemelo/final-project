@@ -24,7 +24,7 @@ module.exports = function (passport) {
                 if (user.password !== password) {
                     return done(null, false, { message: 'Incorrect password.' });
                 }
-                    return donel(null, user);
+                    return done(null, user);
             });
         }
     ));

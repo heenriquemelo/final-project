@@ -20,7 +20,6 @@ $(function () {
                     }
                 }
                 if (++count === stocks.length) {
-                    // DONT PUT GET INSIDE A FOR LOOP
                     console.log(stocks);
                     var template = new EJS({url: '../public/js/portfolio-template.ejs'});
                     template.update('stocks-bought', {stocks: stocks});
