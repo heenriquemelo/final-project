@@ -1,17 +1,21 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../public/css/main.css">
         <title>Login Page</title>
     </head>
     <body>
-        <h1>Login Page</h1>
-        <br>
-        <form method="post">
-            <input name="username" type="email" placeholder="E-mail">
-            <input name="password" type="password" placeholder="Password">
-            <input type="submit">
-        </form>
-        <br>
-        <p>Don't have an account? Sign up <a href="/signup">here</a>.</p>
+        <div class="page-wrap">
+            <h1>Login Page</h1>
+            <br>
+            <form method="post">
+                <input name="username" type="email" placeholder="E-mail" autofocus autocomplete="off">
+                <input name="password" type="password" placeholder="Password">
+                <input type="submit">
+            </form>
+            <br>
+            <p>Don't have an account? Sign up <a href="/signup">here</a>.</p>
+        </div>
     </body>
 </html>

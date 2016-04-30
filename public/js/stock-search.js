@@ -4,13 +4,12 @@ $(function () {
             var params = { symbol: $(this).val() };
             $.get('/stockdata', params, function (data) {
                 if (data.hasOwnProperty('message')) {
-                    $('#error').html(data.message);
+                    alert(data.message);
                     $('#stock-table').empty();
-                    $('form').css('display', 'none');
+                    $('#shares-form').css('display', 'none');
                 } else {
                     var template = new EJS({url: '../public/js/stock-template.ejs'});
                     template.update('stock-table', data);
-                    $('#error').empty();
                 }
             });
             $(this).val('');
@@ -19,11 +18,12 @@ $(function () {
 
     $(document).on('DOMNodeInserted', function(e) {
         if (e.target.id === 'table-element') {
-           $('form').css('display', 'block');
+           $('#shares-form').css('display', 'block');
+           $('input[name="shares"]').focus();
         }
     });
 
-    $('form').on('submit', function (e) {
+    $('#shares-form').on('submit', function (e) {
         e.preventDefault();
         if (Number($('input[name="shares"]').val())) {
             var noOfShares = $('input[name="shares"]').val();
@@ -36,7 +36,7 @@ $(function () {
         
             // handle what happens on success/failure here!! 
             $.post('/stockbought', purchaseData, function (response) {
-                console.log(response);
+                alert(response);
             });
         } else {
             alert('You must type a number!');

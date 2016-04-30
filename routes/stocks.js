@@ -53,7 +53,7 @@ module.exports = function(app) {
             }
         );
 
-        res.json('Success!');
+        res.json('Stock sucessfully bought!');
     });
 
     app.get('/portfolio', isLoggedIn, function (req, res) {

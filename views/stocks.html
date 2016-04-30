@@ -2,24 +2,24 @@
 
 <html>
     <head>
-        <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+        <script src="../public/js/jquery.min.js"></script>
         <script src="../public/js/ejs_production.js"></script>
+        <link rel="stylesheet" type="text/css" href="../public/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../public/css/main.css">
         <title>Stock Search</title>
     </head>
     <body>
-        <h1>Stocks Page</h1>
+        <h1>Stock Search</h1>
         <p>To check the stocks you've already bought, access your <a href="/portfolio">portfolio</a>.</p>
         <br>
-        <input name="symbol" id="search" type="search" placeholder="Type a stock symbol (e.g. AAPL or MSFT)">
+        <input name="symbol" id="search" type="search" placeholder="Type a stock symbol (e.g. AAPL or MSFT)" autofocus autocomplete="off">
         <br><br>
         <div id="stock-table"></div>
         <br>
-        <form>
-            <input name="shares" type="text" placeholder="No. of Shares">
+        <form id="shares-form">
+            <input name="shares" type="text" placeholder="No. of Shares" autocomplete="off">
             <button type="submit">BUY</button>
         </form>
-        <p id="error"></p>
         <script src="../public/js/stock-search.js"></script>
     </body>
 </html>

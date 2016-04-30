@@ -3,6 +3,7 @@ var express = require('express'),
     logger = require('morgan'),
     session = require('express-session'),
     uuid = require('node-uuid'),
+    favicon = require('serve-favicon'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
     loginRouter = require('./routes/login'),
@@ -24,6 +25,7 @@ app.use(session({ secret: secretMaker() }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/public', express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 require('./middlewares/auth')(passport);
 

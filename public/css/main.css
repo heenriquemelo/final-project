@@ -1,3 +1,25 @@
-form {
+
+body {
+    margin-top: 100px !important;
+    text-align: center;
+}
+
+table {
+    margin: 0 auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px;
+}
+
+#shares-form {
     display: none;
+}
+
+input[name="symbol"] {
+    width: 350px;
 }
