@@ -2,7 +2,7 @@ var User = require('../models/users.js').User;
 
 module.exports = function(app, passport) {
 
-    app.get('/', function (req, res) {
+    app.get('/', function (req, res, next) {
         res.render('index');
     });
 
@@ -12,11 +12,11 @@ module.exports = function(app, passport) {
         }
     ));
 
-    app.get('/signup', function (req, res) {
+    app.get('/signup', function (req, res, next) {
         res.render('signup');
     });
 
-    app.post('/signup', function (req, res) {
+    app.post('/signup', function (req, res, next) {
         var name = req.body.name;
         var email = req.body.email;
         var password = req.body.password;
@@ -25,7 +25,7 @@ module.exports = function(app, passport) {
 
         newUser.save(function(err, obj) {
             if (err) {
-                console.log(err);
+                next(err);
             } else {
                 res.redirect('/');
             }

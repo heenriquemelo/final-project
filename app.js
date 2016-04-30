@@ -8,6 +8,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     loginRouter = require('./routes/login'),
     stocksRouter = require('./routes/stocks'),
+    handleError = require('./middlewares/handleError'),
     pageNotFound = require('./middlewares/pageNotFound');
 
 app.set('views', __dirname + '/views');
@@ -32,6 +33,8 @@ require('./middlewares/auth')(passport);
 loginRouter(app, passport);
 
 stocksRouter(app);
+
+app.use(handleError);
 
 app.use(pageNotFound);
 

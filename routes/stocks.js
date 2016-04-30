@@ -4,12 +4,12 @@ var isLoggedIn = require('../middlewares/isLoggedIn'),
 
 module.exports = function(app) {
 
-    app.get('/stocks', isLoggedIn, function (req, res) {
+    app.get('/stocks', isLoggedIn, function (req, res, next) {
         res.render('stocks');
     });
 
     // Endpoint that has the API data pulled from MarketOnDemand
-    app.get('/stockdata', isLoggedIn, function (req, res) {
+    app.get('/stockdata', isLoggedIn, function (req, res, next) {
 
         // req.query for GET, req.body for POST.
         var symbol = req.query.symbol;
@@ -17,7 +17,7 @@ module.exports = function(app) {
 
         var stockHandler = function (err, data) {
             if (err) {
-                console.log(err);
+                next(err);
             } else if (JSON.parse(data.JSON).hasOwnProperty('Message')) {
                 res.json({message: 'Invalid stock! Try something like AAPL, MSFT or GPRO.'});
             } else {
@@ -38,7 +38,7 @@ module.exports = function(app) {
     });
 
     // Endpoint that has the data from the stocks bought that was sent through JQuery.
-    app.post('/stockbought', isLoggedIn, function (req, res) {
+    app.post('/stockbought', isLoggedIn, function (req, res, next) {
         var stockbought = req.body;
 
         db.User.findByIdAndUpdate(
@@ -46,7 +46,7 @@ module.exports = function(app) {
             {$push: {'stocks': stockbought}},
             function (err, result) {
                 if (err) {
-                    console.log(err);
+                    next(err);
                 } else {
                     console.log(result);
                 }
@@ -56,14 +56,14 @@ module.exports = function(app) {
         res.json('Stock sucessfully bought!');
     });
 
-    app.get('/portfolio', isLoggedIn, function (req, res) {
+    app.get('/portfolio', isLoggedIn, function (req, res, next) {
         res.render('portfolio');
     });
 
-    app.get('/stockslist', isLoggedIn, function (req, res) {
+    app.get('/stockslist', isLoggedIn, function (req, res, next) {
         db.User.findOne({_id: req.session.passport.user}, function (err, user) {
             if (err) {
-                console.log(err);
+                next(err);
             } else {
                 res.json(user.stocks);
             }

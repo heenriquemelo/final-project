@@ -2,7 +2,6 @@ $(function () {
     $.get('/stockslist', function (stocks) {
         // Use EJS template to display ONE stock.
         // Iterate through this template using a for loop for each stock.
-        console.time('test');
         var count = 0;
         for (var i = 0; i < stocks.length; i++) {
             var params = {symbol: stocks[i].symbol};
@@ -27,7 +26,6 @@ $(function () {
                     template.update('stocks-bought', {stocks: stocks});
                 }
             });
-        console.timeEnd('test');
         }
     });
 });

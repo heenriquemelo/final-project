@@ -33,8 +33,7 @@ $(function () {
                 priceBought: $('#lastPrice').html().trim(),
                 noOfShares: noOfShares
             };
-        
-            // handle what happens on success/failure here!! 
+            
             $.post('/stockbought', purchaseData, function (response) {
                 alert(response);
             });

@@ -1,4 +1,4 @@
-module.exports = function handleError(req, res, next) {
+module.exports = function handleError (req, res, next) {
     res.status(404);
     res.render('error', {
         statusCode: res.statusCode,
